@@ -48,7 +48,7 @@ yarn add @handlewithcare/react-prosemirror prosemirror-view@1.37.1 prosemirror-s
     - [`useEditorEventCallback`](#useeditoreventcallback)
     - [`useEditorEventListener`](#useeditoreventlistener)
   - [Building node views with React](#building-node-views-with-react)
-- [What's changing in v2?](#whats-changing-in-v2)
+- [What's new in v2?](#whats-new-in-v2)
   - [API changes](#api-changes)
 - [API](#api)
   - [`ProseMirror`](#prosemirror)
@@ -61,6 +61,7 @@ yarn add @handlewithcare/react-prosemirror prosemirror-view@1.37.1 prosemirror-s
   - [`useStopEvent`](#usestopevent)
   - [`useSelectNode`](#useselectnode)
   - [`widget`](#widget)
+- [Looking for someone to collaborate with?](#looking-for-someone-to-collaborate-with)
 
 <!-- tocstop -->
 
@@ -421,9 +422,9 @@ function ProseMirrorEditor() {
 }
 ```
 
-## What's changing in v2?
+## What's new in v2?
 
-The upcoming v2 release constitutes a significant re-write of the library.
+The v2 release constitutes a significant re-write of the library.
 
 Previously, React ProseMirror relied on ProseMirror's EditorView to manage the
 DOM for the editor. To integrate it with React, we used React
@@ -708,3 +709,10 @@ type widget = (
 
 Like ProseMirror View's `Decoration.widget`, but with support for React
 components.
+
+## Looking for someone to collaborate with?
+
+Reach out to [Handle with Care](https://handlewithcare.dev/#get-in-touch)! We're
+a product development collective with years of experience bringing excellent
+ideas to life. We love React and ProseMirror, and we're always looking for new
+folks to work with!

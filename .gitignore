@@ -2,6 +2,7 @@
 
 # Compiled code
 /dist/*
+/docs/*
 
 # We need to check in the package.json for /dist/cjs so that
 # consumers know to treat it as cjs

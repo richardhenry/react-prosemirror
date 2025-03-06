@@ -1,14 +1,9 @@
-import { ForwardRefExoticComponent, RefAttributes, createContext } from "react";
+import { ComponentType, createContext } from "react";
 
 import { NodeViewComponentProps } from "../components/NodeViewComponentProps.js";
 
 export type NodeViewContextValue = {
-  nodeViews: Record<
-    string,
-    ForwardRefExoticComponent<
-      NodeViewComponentProps & RefAttributes<HTMLElement>
-    >
-  >;
+  nodeViews: Record<string, ComponentType<NodeViewComponentProps>>;
 };
 
 export const NodeViewContext = createContext(

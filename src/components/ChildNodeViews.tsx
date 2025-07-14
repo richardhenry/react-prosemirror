@@ -261,10 +261,12 @@ function createKey(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return (widget as any).type.spec.key;
 
-    // eslint-disable-next-line no-console
-    console.warn(
-      `Widget at position ${pos} doesn't have a key specified. This may cause issues.`
-    );
+    if (type === "widget") {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `Widget at position ${pos} doesn't have a key specified. React ProseMirror will generate a key partially based on this widget’s index into its parent’s children. This can cause issues if there are multiple adjacent widgets.`
+      );
+    }
     return `${key}-${index}`;
   }
 
@@ -529,20 +531,22 @@ export const ChildNodeViews = memo(function ChildNodeViews({
 
   const childElements = createChildElements(children, getInnerPos);
 
-  const lastChild = children[children.length - 1];
+  if (node.isTextblock) {
+    const lastChild = children[children.length - 1];
 
-  if (
-    !lastChild ||
-    lastChild.type !== "node" ||
-    (lastChild.node.isInline && !lastChild.node.isText) ||
-    // RegExp.test actually handles undefined just fine
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    /\n$/.test(lastChild.node.text!)
-  ) {
-    childElements.push(
-      <SeparatorHackView getPos={getInnerPos} key="trailing-hack-img" />,
-      <TrailingHackView getPos={getInnerPos} key="trailing-hack-br" />
-    );
+    if (
+      !lastChild ||
+      lastChild.type !== "node" ||
+      (lastChild.node.isInline && !lastChild.node.isText) ||
+      // RegExp.test actually handles undefined just fine
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      /\n$/.test(lastChild.node.text!)
+    ) {
+      childElements.push(
+        <SeparatorHackView getPos={getInnerPos} key="trailing-hack-img" />,
+        <TrailingHackView getPos={getInnerPos} key="trailing-hack-br" />
+      );
+    }
   }
 
   return <>{childElements}</>;

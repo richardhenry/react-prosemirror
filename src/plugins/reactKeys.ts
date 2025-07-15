@@ -47,9 +47,9 @@ export function reactKeys() {
        * node was deleted.
        */
       apply(tr, value, _, newState) {
-        if (!tr.docChanged || composing) return value;
-        const meta = tr.getMeta(reactKeysPluginKey);
-        const keyToBust = meta?.type === "bustKey" && meta.payload.key;
+        if (!tr.docChanged || composing) {
+          return value;
+        }
 
         const next = {
           posToKey: new Map<number, string>(),
@@ -62,14 +62,8 @@ export function reactKeys() {
           const { pos: newPos, deleted } = tr.mapping.mapResult(pos);
           if (deleted) continue;
 
-          let newKey = key;
-
-          if (keyToBust === key) {
-            newKey = createNodeKey();
-          }
-
-          next.posToKey.set(newPos, newKey);
-          next.keyToPos.set(newKey, newPos);
+          next.posToKey.set(newPos, key);
+          next.keyToPos.set(key, newPos);
         }
         newState.doc.descendants((_, pos) => {
           if (next.posToKey.has(pos)) return true;

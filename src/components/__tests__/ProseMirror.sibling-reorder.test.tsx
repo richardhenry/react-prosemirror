@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { schema } from 'prosemirror-schema-basic'
 import { EditorState } from "prosemirror-state";
 
@@ -51,7 +51,7 @@ describe("ProseMirror sibling reordering", () => {
       );
     }
 
-    render(<TestCase />);
+    render(<TestCase />, { reactStrictMode: true });
 
     // Type initial text
     const editor = screen.getByTestId("editor");
